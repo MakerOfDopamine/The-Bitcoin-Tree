@@ -7,13 +7,13 @@ let modInfo = {
 	discordLink: "",
 	changelogLink: "https://github.com/MakerOfDopamine/The-Modding-Tree/blob/master/changelog.md",
     offlineLimit: 24,  // In hours
-    initialStartPoints: new Decimal (10) // Used for hard resets and new players
+    initialStartPoints: new Decimal (0.25) // Used for hard resets and new players
 }
 
 // Set your version in num and name
 let VERSION = {
 	num: "0.0.1",
-	name: "The Prestige Update",
+	name: "The Instant Update",
 }
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -38,6 +38,7 @@ function getPointGen() {
 	let baseExp = 2
 	baseExp *= hasUpgrade("p",11) ? upgradeEffect("p",11) : 1
 	gain = gain.plus(1).log10().pow(baseExp)
+	return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
