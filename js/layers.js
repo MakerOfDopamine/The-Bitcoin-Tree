@@ -178,7 +178,7 @@ addLayer("b",{
             unlocked: false,
 			points: new Decimal(0),
         }},
-        color: "#8f8fff",
+        color: "#2f2fff",
         requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
         resource: "Boosters", // Name of prestige currency
         baseResource: "Prestige Points", // Name of resource prestige is based on
@@ -197,5 +197,5 @@ addLayer("b",{
         hotkeys: [
             {key: "b", description: "Reset for boosters", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
-        layerShown(){return hasUpgrade("p",27)},
+        layerShown(){return hasUpgrade("p",27) || player.b.points.gt(0)},
 })
