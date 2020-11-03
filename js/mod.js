@@ -34,14 +34,10 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(0)
-	if (hasUpgrade("p",11)) gain = gain.plus(1)
-	for (var t = 2; t < 8; t++) if (hasUpgrade("p",Number("1" + t))) gain = gain.times(hasUpgrade("p",24) ? 3 : 2)
-	let upg21Eff = upgradeEffect("p",21)
-	if (hasUpgrade("p",21)) gain = gain.times(upg21Eff)
-	let upg22Eff = upgradeEffect("p",22)
-	if (hasUpgrade("p",22)) gain = gain.times(upg22Eff)
-	return gain
+	let gain = new Decimal(0.01)
+	let baseExp = 2
+	baseExp *= hasUpgrade("p",11) ? upgradeEffect("p",11) : 1
+	gain = gain.plus(1).log10().pow(baseExp)
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
