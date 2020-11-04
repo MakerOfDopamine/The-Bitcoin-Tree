@@ -28,13 +28,28 @@ addLayer("p", {
         layerShown(){return true},
         upgrades: {
             rows: 1,
-            cols: 1,
+            cols: 7,
             11: {
-                description: "Replicators are 10% more effective.",
+                description: "Replicators are more effective.",
                 cost: new Decimal(1),
                 effect() {
-                    return new Decimal(1.1)
+                    return new Decimal(1.1).times(hasUpgrade("p",12) ? 1.1 : 1).times(hasUpgrade("p",14) ? 1.2 : 1)
+                },
+                effectDisplay() {
+                    return "x" + format(upgradeEffect("p",11)) + "."
                 }
+            },
+            12: {
+                description: "The previous upgrade is 10% better.",
+                cost: new Decimal(1)
+            },
+            13: {
+                description: "Gain an additional 2x multiplier to replicators.",
+                cost: new Decimal(1)
+            },
+            14: {
+                description: "Upgrade 11 is 20% better.",
+                cost: new Decimal(2)
             }
         }
     }

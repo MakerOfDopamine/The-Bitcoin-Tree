@@ -1,8 +1,8 @@
 let modInfo = {
-	name: "The Ultimate Tree",
-	id: "ultimate",
+	name: "The Extended Tree",
+	id: "extended",
 	author: "me",
-	pointsName: "points",
+	pointsName: "replicator",
 	discordName: "",
 	discordLink: "",
 	changelogLink: "https://github.com/MakerOfDopamine/The-Modding-Tree/blob/master/changelog.md",
@@ -35,9 +35,10 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(0.01)
-	let baseExp = 2
-	baseExp *= hasUpgrade("p",11) ? upgradeEffect("p",11) : 1
-	gain = gain.plus(1).log10().pow(baseExp)
+	let baseExp = new Decimal(2)
+	if (hasUpgrade("p",11)) baseExp = baseExp.times(upgradeEffect("p",11))
+	if (hasUpgrade("p",13)) gain = gain.times(2)
+	gain = gain.times(player.points.plus(10).log10().pow(baseExp))
 	return gain
 }
 
@@ -47,6 +48,8 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+	"Base replicator gain: 0.01/s",
+	"Formula: log10(BaseGain + 1.3)^2"
 ]
 
 // Determines when the game "ends"
