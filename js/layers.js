@@ -7,7 +7,7 @@ addLayer("p", {
 			points: new Decimal(0),
         }},
         color: "#00bfbf",
-        requires: new Decimal(0.25), // Can be a function that takes requirement increases into account
+        requires: new Decimal(10), // Can be a function that takes requirement increases into account
         resource: "Prestige Points", // Name of prestige currency
         baseResource: "points", // Name of resource prestige is based on
         baseAmount() {return player.points}, // Get the current amount of baseResource
@@ -27,29 +27,75 @@ addLayer("p", {
         ],
         layerShown(){return true},
         upgrades: {
-            rows: 1,
+            rows: 4,
             cols: 7,
             11: {
-                description: "Replicators are more effective.",
-                cost: new Decimal(1),
-                effect() {
-                    return new Decimal(1.1).times(hasUpgrade("p",12) ? 1.1 : 1).times(hasUpgrade("p",14) ? 1.2 : 1)
-                },
-                effectDisplay() {
-                    return "x" + format(upgradeEffect("p",11)) + "."
-                }
+                title: "Point Generation",
+                description: "Get a point every second!",
+                cost: new Decimal(1)
             },
             12: {
-                description: "The previous upgrade is 10% better.",
-                cost: new Decimal(1)
+                title: "Point Generator",
+                description: "Get two more points every second!",
+                cost: new Decimal(1),
+                unlocked() {
+                    return hasP(11)
+                }
             },
             13: {
-                description: "Gain an additional 2x multiplier to replicators.",
-                cost: new Decimal(1)
+                title: "Point Generation Robot",
+                description: "Get six more points every second!",
+                cost: new Decimal(2),
+                unlocked() {
+                    return hasP(12)
+                }
             },
             14: {
-                description: "Upgrade 11 is 20% better.",
-                cost: new Decimal(2)
-            }
+                title: "Point Virtualiser",
+                description: "Get twelve more points every second!",
+                cost: new Decimal(3),
+                unlocked() {
+                    return hasP(13)
+                }
+            },
+            15: {
+                title: "Point Superaliser",
+                description: "???",
+                cost: new Decimal(1/0),
+                unlocked() {
+                    return false
+                }
+            },
+            16: {
+                title: "Point Ultraliser",
+                description: "???",
+                cost: new Decimal(1/0),
+                unlocked() {
+                    return false
+                }
+            },
+            17: {
+                title: "???",
+                description: "???",
+                cost: new Decimal(1/0),
+                unlocked() {
+                    return false
+                }
+            },
+            21: {
+                title: "Point Booster",
+                description: "Get twice as much points!",
+                cost: new Decimal(5),
+            },
+            31: {
+                title: "Prestige Booster",
+                description: "Get twice as much prestige points!",
+                cost: new Decimal(20),
+            },
+            41: {
+                title: "Point Reconstructor",
+                description: "Get more points based on your current points!",
+                cost: new Decimal(1e3),
+            },
         }
 })
