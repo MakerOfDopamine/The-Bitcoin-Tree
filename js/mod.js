@@ -3,15 +3,15 @@ function hasP(ID) {
 }
 
 let modInfo = {
-	name: "The Extended Tree",
-	id: "extended",
+	name: "The Bitcoin Tree",
+	id: "bitcoin",
 	author: "me",
-	pointsName: "points",
+	pointsName: "satoshi",
 	discordName: "",
 	discordLink: "",
 	changelogLink: "https://github.com/MakerOfDopamine/The-Modding-Tree/blob/master/changelog.md",
     offlineLimit: 24,  // In hours
-    initialStartPoints: new Decimal (10) // Used for hard resets and new players
+    initialStartPoints: new Decimal (100) // Used for hard resets and new players
 }
 
 // Set your version in num and name
@@ -38,11 +38,7 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 	let gain = new Decimal(0)
-	if (hasP(11)) gain = gain.plus(1)
-	if (hasP(12)) gain = gain.plus(2)
-	if (hasP(13)) gain = gain.plus(6)
-	if (hasP(14)) gain = gain.plus(12)
-	if (hasP(21)) gain = gain.times(2)
+	if (hasUpgrade("c",11)) gain = gain.plus(upgradeEffect("c",11))
 	return gain
 }
 
@@ -57,6 +53,10 @@ var displayThings = [
 // Determines when the game "ends"
 function isEndgame() {
 	return player.points.gte(new Decimal("eeee10"))
+}
+
+function hasC(n) {
+	return hasUpgrade("c",n)
 }
 
 // Less important things beyond this point!
