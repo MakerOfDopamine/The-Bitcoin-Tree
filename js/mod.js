@@ -3,15 +3,15 @@ function hasP(ID) {
 }
 
 let modInfo = {
-	name: "The Extended Tree",
-	id: "extended",
+	name: "The Bitcoin Tree",
+	id: "bitcoin",
 	author: "me",
-	pointsName: "points",
+	pointsName: "satoshi",
 	discordName: "",
 	discordLink: "",
 	changelogLink: "https://github.com/MakerOfDopamine/The-Modding-Tree/blob/master/changelog.md",
     offlineLimit: 24,  // In hours
-    initialStartPoints: new Decimal (10) // Used for hard resets and new players
+    initialStartPoints: new Decimal (100) // Used for hard resets and new players
 }
 
 // Set your version in num and name
