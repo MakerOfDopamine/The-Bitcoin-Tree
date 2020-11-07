@@ -35,7 +35,8 @@ addLayer("c", {
                 effect() {
                     var m = new Decimal(5)
                     if (hasC(12)) m = m.times(5)
-                    if (hasC(13)) m = m.times(player.c.points.plus(10).log10())
+                    if (hasC(13)) m = m.times(upgradeEffect("c",13))
+                    if (hasC(14)) m = m.times(upgradeEffect("c",14))
                     return m
                 },
                 effectDisplay() {
