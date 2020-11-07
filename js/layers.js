@@ -57,10 +57,10 @@ addLayer("c", {
                     return hasC(12)
                 },
                 effect() {
-                    return player.c.points.plus(10).log10()
+                    return player.c.points.plus(2).sqrt()
                 },
                 effectDisplay() {
-                    return "*" + player.c.points.plus(10).log10().toFixed(3) + "."
+                    return "*" + player.c.points.plus(2).sqrt().toFixed(3) + "."
                 }
             },
             14: {
@@ -70,10 +70,10 @@ addLayer("c", {
                     return hasC(13)
                 },
                 effect() {
-                    return player.points.sqrt().plus(10).log10()
+                    return player.points.plus(10).log10()
                 },
                 effectDisplay() {
-                    return "*" + player.c.points.sqrt().plus(10).log10().toFixed(3) + "."
+                    return "*" + player.points.plus(10).log10().toFixed(3) + "."
                 }
             },
         }
