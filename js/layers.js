@@ -57,10 +57,13 @@ addLayer("c", {
                     return hasC(12)
                 },
                 effect() {
-                    return player.c.points.plus(2).sqrt()
+                    var eff13 = player.c.points.plus(2).sqrt().pow(hasC(15) ? 1.2 : 1)
+                    var softcappedEff = eff13.gt(2) ? eff13.times(2).sqrt() : eff13
+                    var doubleEff = eff13.gt(10) ? softcappedEff.div(10).add(10).log10().times(10) : softcappedEff
+                    return doubleEff
                 },
                 effectDisplay() {
-                    return "*" + player.c.points.plus(2).sqrt().toFixed(3) + "."
+                    return "*" + upgradeEffect("c",13).toFixed(3) + "." + (upgradeEffect("c",13) > 2 ? " (softcapped)" : "")
                 }
             },
             14: {
@@ -70,10 +73,23 @@ addLayer("c", {
                     return hasC(13)
                 },
                 effect() {
-                    return player.points.plus(10).log10()
+                    return player.points.plus(10).log10().pow(hasC(15) ? 1.2 : 1)
                 },
                 effectDisplay() {
                     return "*" + player.points.plus(10).log10().toFixed(3) + "."
+                }
+            },
+            15: {
+                description: "Raise Upgrade 13 and 14 to the power of 6/5. (This applies before softcaps)",
+                cost: new Decimal(10),
+                unlocked() {
+                    return hasC(14)
+                },
+                effect() {
+                    return new Decimal(1.2)
+                },
+                effectDisplay() {
+                    return "^" + upgradeEffect("c",15).toFixed(3) + "."
                 }
             },
         }
