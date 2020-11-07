@@ -35,10 +35,11 @@ addLayer("c", {
                 effect() {
                     var m = new Decimal(5)
                     if (hasC(12)) m = m.times(5)
+                    if (hasC(13)) m = m.times(player.c.points.plus(10).log10())
                     return m
                 },
                 effectDisplay() {
-                    return "+" + upgradeEffect("c",11) + "/s."
+                    return "+" + upgradeEffect("c",11).toFixed(3) + "/s."
                 }
             },
             12: {
@@ -46,6 +47,19 @@ addLayer("c", {
                 cost: new Decimal(2),
                 unlocked() {
                     return hasC(11)
+                }
+            },
+            13: {
+                description: "Gain more satoshis based on your hashes.",
+                cost: new Decimal(3),
+                unlocked() {
+                    return hasC(12)
+                },
+                effect() {
+                    return player.c.points.plus(10).log10()
+                },
+                effectDisplay() {
+                    return "*" + player.c.points.plus(10).log10().toFixed(3) + "."
                 }
             },
         }
