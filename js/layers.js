@@ -36,6 +36,9 @@ addLayer("c", {
                     var m = new Decimal(5)
                     if (hasC(12)) m = m.times(5)
                     return m
+                },
+                effectDisplay() {
+                    return "+" + upgradeEffect("c",11) + "/s."
                 }
             },
             12: {
