@@ -57,9 +57,10 @@ addLayer("c", {
                     return hasC(12)
                 },
                 effect() {
-                    var eff13 = player.c.points.plus(2).sqrt().pow(hasC(15) ? 1.2 : 1)
+                    var eff13 = player.c.points.plus(2).sqrt().pow(hasC(15) && !hasC(16) ? 1.2 : 1)
                     var softcappedEff = eff13.gt(2) ? eff13.times(2).sqrt() : eff13
                     var doubleEff = eff13.gt(10) ? softcappedEff.div(10).add(10).log10().times(10) : softcappedEff
+                    doubleEff = doubleEff.pow(hasC(16) ? 1.15 : 1)
                     return doubleEff
                 },
                 effectDisplay() {
@@ -90,6 +91,13 @@ addLayer("c", {
                 },
                 effectDisplay() {
                     return "^" + upgradeEffect("c",15).toFixed(3) + "."
+                }
+            },
+            16: {
+                description: "The Previous Upgrade applies after softcap, but the effect is reduced to ^23/20.",
+                cost: new Decimal(50),
+                unlocked() {
+                    return hasC(15)
                 }
             },
         }
