@@ -62,5 +62,18 @@ addLayer("c", {
                     return "*" + player.c.points.plus(10).log10().toFixed(3) + "."
                 }
             },
+            14: {
+                description: "Gain more satoshis based on your satoshis.",
+                cost: new Decimal(5),
+                unlocked() {
+                    return hasC(13)
+                },
+                effect() {
+                    return player.points.sqrt().plus(10).log10()
+                },
+                effectDisplay() {
+                    return "*" + player.c.points.sqrt().plus(10).log10().toFixed(3) + "."
+                }
+            },
         }
 })
