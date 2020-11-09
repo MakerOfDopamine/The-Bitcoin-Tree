@@ -19,6 +19,7 @@ addLayer("c", {
         },
         gainExp() { // Calculate the exponent on main currency from bonuses
             var exp = upgradeEffect("c",23)
+            if (hasUpgrade("o",12)) exp = exp.times(upgradeEffect("o",12))
             return exp
         },
         row: 0, // Row the layer is in on the tree (0 is the first row)
@@ -196,4 +197,30 @@ addLayer("o", {
         {key: "o", description: "Reset for overclockers", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return hasC(25) || player.o.points.gt(0)},  
+    upgrades: {
+        rows: 1,
+        cols: 3,
+        11: {
+            description: "clocks boost satoshi gain.",
+            effect() {
+                return player.o.points.plus(1).log10().pow(2).plus(1)
+            },
+            effectDisplay() {
+                return "*" + upgradeEffect("o",11).toFixed(3) + "."
+            }
+        },
+        12: {
+            description: "clocks boost hash gain.",
+            effect() {
+                return player.o.points.plus(2).log10().plus(2).log10().plus(2).log10().plus(0.6267343971100877)
+            },
+            effectDisplay() {
+                return "^" + upgradeEffect("o",12).toFixed(3) + "."
+            }
+        },
+        13: {
+            description: "Unlock more hash upgrades. [NOT FUNCTIONAL YET]",
+            cost: new Decimal(2)
+        }
+    }
 })
