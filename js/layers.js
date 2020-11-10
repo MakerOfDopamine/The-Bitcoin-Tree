@@ -162,7 +162,7 @@ addLayer("c", {
             25: {
                 title: "2;5",
                 description: "Unlock overclockers.",
-                cost: new Decimal(1e4),
+                cost: new Decimal(2e3),
                 unlocked() {
                     return hasC(24)
                 }
